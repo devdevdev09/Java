@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.w3c.dom.TypeInfo;
 
 @RestController
 @RequestMapping("/java/sort")
@@ -83,9 +84,38 @@ public class SortTest {
         return result;
     }
 
+    public void dartExam(){
+        String dartResult = "10S2D*3T";
+
+        String[] point = dartResult.replaceAll("[^0-9]{1,2}", ",").split(",");
+        String[] bonus = dartResult.replaceAll("[0-9]{1,2}", ",").split(",");
+
+        List<Object> list = new ArrayList<Object>(Arrays.asList(Integer.parseInt(point[0]), bonus[1], Integer.parseInt(point[1]), bonus[2], Integer.parseInt(point[2]), bonus[3]));
+
+        for(Object obj : list){
+            if(obj instanceof String){
+                System.out.println("string : " + obj);
+            }
+
+            if(obj instanceof Integer){
+                System.out.println("integer : " + obj);
+            }
+
+        }
+    }
+
     public static void main(String[] args) {
         SortTest sort = new SortTest();
-        sort.sortExam();
+        // sort.sortExam();
+        // 1	1S2D*3T	37	11 * 2 + 22 * 2 + 33
+        // 2	1D2S#10S	9	12 + 21 * (-1) + 101
+        // 3	1D2S0T	3	12 + 21 + 03
+        // 4	1S*2T*3S	23	11 * 2 * 2 + 23 * 2 + 31
+        // 5	1D#2S*3S	5	12 * (-1) * 2 + 21 * 2 + 31
+        // 6	1T2D3D#	-4	13 + 22 + 32 * (-1)
+        // 7	1D2S3T*	59	12 + 21 * 2 + 33 * 2
+
+        sort.dartExam();
     }
     
 }
