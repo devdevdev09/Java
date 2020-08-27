@@ -18,13 +18,13 @@ public class SortTest {
     @RequestMapping("/list")
     public void sortExam(){
         // List<String> sList = new ArrayList<String>(Arrays.asList("F-5 Freedom Fighter", "B-50 Superfortress", "A-10 Thunderbolt II", "F-14 Tomcat"));
-        List<String> sList = new ArrayList<String>(Arrays.asList("foo010bar020.zip","foo9.txt", "F-15"));
+        List<String> sList = new ArrayList<String>(Arrays.asList("fo  o010bar020.zip","foo9.txt", "F-15"));
         
         Collections.sort(sList, new Comparator<String>(){
             @Override
             public int compare(String o1, String o2) {
-                String[] arr1 = strSplit(o1);
-                String[] arr2 = strSplit(o2);
+                String[] arr1 = strSplit2(o1);
+                String[] arr2 = strSplit2(o2);
 
                 String head1 = arr1[0].toLowerCase();
                 String head2 = arr2[0].toLowerCase();
@@ -55,6 +55,34 @@ public class SortTest {
         }
 
         return result;
+    }
+
+    public String[] strSplit2(String filename) {
+        String[] result = new String[2];
+
+        String head = "";
+        String num = "";
+
+        for(char c : filename.toCharArray()){
+            if(!Character.isDigit(c) && num.length() > 0){
+                break;
+            }
+
+            if(!Character.isDigit(c)){
+                head += c;
+            }else{
+                num += c;
+            }
+        }
+        result[0] = head;
+        result[1] = num;
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        SortTest sort = new SortTest();
+        sort.sortExam();
     }
     
 }
