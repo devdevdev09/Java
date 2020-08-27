@@ -1,7 +1,9 @@
 package com.example.java.sortexam;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,36 +17,44 @@ public class SortTest {
 
     @RequestMapping("/list")
     public void sortExam(){
-        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
-
-        Map<String, String> map1 = new HashMap<String, String>();
-        map1.put("HEAD", "foo");
-        map1.put("NUMBER", "9");
-        map1.put("TAIL", ".txt");
+        // List<String> sList = new ArrayList<String>(Arrays.asList("F-5 Freedom Fighter", "B-50 Superfortress", "A-10 Thunderbolt II", "F-14 Tomcat"));
+        List<String> sList = new ArrayList<String>(Arrays.asList("foo010bar020.zip","foo9.txt", "F-15"));
         
+        Collections.sort(sList, new Comparator<String>(){
+            @Override
+            public int compare(String o1, String o2) {
+                String[] arr1 = strSplit(o1);
+                String[] arr2 = strSplit(o2);
 
-        Map<String, String> map2 = new HashMap<String, String>();
-        map2.put("HEAD", "foo");
-        map2.put("NUMBER", "010");
-        map2.put("TAIL", "bar020.zip");
+                String head1 = arr1[0].toLowerCase();
+                String head2 = arr2[0].toLowerCase();
+                return (head1.compareTo(head2) == 0) ? 
+                        Integer.parseInt(arr1[1]) - Integer.parseInt(arr2[1]) : head1.compareTo(head2);
+            }
+        });
 
 
-        Map<String, String> map3 = new HashMap<String, String>();
-        map3.put("HEAD", "foo");
-        map3.put("NUMBER", "9");
-        map3.put("TAIL", "");
+        String num = "0001";
+        System.out.println("num : " + Integer.parseInt(num));
 
-        list.add(map1);
-        list.add(map2);
-        list.add(map3);
+        for(String str : sList){
+            System.out.print(str + ", ");
+        }
+    }
 
-        for(Map<String, String> mp : list){
-            System.out.print(mp.get("HEAD") + mp.get("NUMBER") + mp.get("TAIL") + "\n");
+    public String[] strSplit(String filename) {
+        String[] result = new String[2];
+
+        result[0] = filename.split("[0-9]")[0];
+
+        for(String tmp : filename.split("[^0-9]")){
+            if(!tmp.equals("")){
+                result[1] = tmp;
+                break;
+            }
         }
 
-        // for(Map<String, String> mp : list){
-        //     System.out.print(mp.get("HEAD") + mp.get("NUMBER") + mp.get("TAIL"));
-        // }
+        return result;
     }
     
 }
