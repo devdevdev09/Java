@@ -28,16 +28,19 @@ public class SortTest {
 
                 String head1 = arr1[0].toLowerCase();
                 String head2 = arr2[0].toLowerCase();
-                return (head1.compareTo(head2) == 0) ? 
-                        Integer.parseInt(arr1[1]) - Integer.parseInt(arr2[1]) : head1.compareTo(head2);
+
+                int num1 = Integer.parseInt(arr1[1]);
+                int num2 = Integer.parseInt(arr2[1]);
+
+                int result = head1.compareTo(head2);
+                
+                return (result == 0) ? num1 - num2 : result;
             }
         });
 
+        String[] answer = sList.toArray(new String[0]);
 
-        String num = "0001";
-        System.out.println("num : " + Integer.parseInt(num));
-
-        for(String str : sList){
+        for(String str : answer){
             System.out.print(str + ", ");
         }
     }
