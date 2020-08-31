@@ -15,27 +15,29 @@ public class QueueExam {
     
     @RequestMapping("/pop/exam1")
     public void popExam1(){
-        Queue<String> queue = new LinkedList<String>();
-        queue.add("K");
-        queue.add("A");
-        queue.add("K");
-        queue.add("A");
-        queue.add("O");
+        Queue<String> queue = new LinkedList<String>(Arrays.asList("K", "A", "K", "A", "O"));
 
-        List<String> indexList = new ArrayList(Arrays.asList("K", "A", "K", "A", "0"));
+        // A - Z;
+        List<String> indexList = new ArrayList(Arrays.asList("A", "K", "O"));
+        String temp = "";
 
         while(!queue.isEmpty()){
-            String str = queue.poll();
-            int idxOf = indexList.indexOf(str);
+            int idxOf = indexList.indexOf(queue.peek());
             if(idxOf > -1){
-                indexList.add(str + queue.peek());
+                temp += queue.peek();
             }else{
-                str = str+queue.peek();
-                indexList.add(str);
+                temp += queue.peek();
+                indexList.add(temp);
+                queue.poll();
+                temp = "";
             }
 
-            System.out.println(idxOf + " : poll : " + str + " peek : " + queue.peek());
+            System.out.println("temp : " + temp);
             
         }
+    }
+
+    public String getW(String w){
+        return "";
     }
 }
