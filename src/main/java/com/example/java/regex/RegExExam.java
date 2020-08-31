@@ -1,9 +1,7 @@
 package com.example.java.regex;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.regex.*;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,6 +39,8 @@ public class RegExExam {
                 System.out.println("번호 틀림 : " + str);
             }
         }
+
+        "test".matches("test");
 
         // result.put("regex", regex);
         // result.put("input", input);
