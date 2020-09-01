@@ -13,31 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/queue")
 public class QueueExam {
     
+    public static void main(String[] args) {
+        QueueExam queueExam = new QueueExam();
+        queueExam.popExam1();
+    }
+ 
     @RequestMapping("/pop/exam1")
     public void popExam1(){
-        Queue<String> queue = new LinkedList<String>(Arrays.asList("K", "A", "K", "A", "O"));
+        Queue<String> queue = new LinkedList<String>(Arrays.asList("A", "B", "C", "D", "E"));
 
-        // A - Z;
-        List<String> indexList = new ArrayList(Arrays.asList("A", "K", "O"));
-        String temp = "";
+        String poll1 = queue.poll();
+        System.out.println("poll1 : " + poll1);
+        String peek1 = queue.peek();
+        System.out.println("peek1 : " + peek1);
+
+        String peek2 = queue.peek();
+        System.out.println("peek2 : " + peek2);
+        String poll2 = queue.poll();
+        System.out.println("poll2 : " + poll2);
 
         while(!queue.isEmpty()){
-            int idxOf = indexList.indexOf(queue.peek());
-            if(idxOf > -1){
-                temp += queue.peek();
-            }else{
-                temp += queue.peek();
-                indexList.add(temp);
-                queue.poll();
-                temp = "";
-            }
-
-            System.out.println("temp : " + temp);
-            
+            System.out.println("for poll : " + queue.poll());
         }
-    }
-
-    public String getW(String w){
-        return "";
     }
 }
